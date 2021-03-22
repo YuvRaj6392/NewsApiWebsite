@@ -47,9 +47,9 @@
     </div>
   </div>
 </nav>
-<div class="container my-2">
+<div class="container-fluid my-2">
 <h1>YR News<span class="badge bg-warning">Exclusive</span></h1>
-<ul id=newsaccord>
+<ul style="list-style:none;" id=newsaccord>
 </ul>
 </div>
 
@@ -67,13 +67,16 @@
 <script>
 let newsaccord=document.getElementById('newsaccord');
 const xhr=new XMLHttpRequest();
-xhr.open('GET','https://newsapi.org/v2/top-headlines?sources=bbc-news&apiKey=cc1c8918058e4e4e8fec69abefb33e40',true);
+xhr.open('GET','https://newsapi.org/v2/top-headlines?country=in&apiKey=cc1c8918058e4e4e8fec69abefb33e40',true);
 xhr.onload=function(){
 let json=JSON.parse(this.responseText);
 let articles=json.articles;
 let htm="";
 for(key in articles){
-let news=`<li class="my-2"><span class="text-danger">${articles[key].title}</span></li><span class="text-primary">${articles[key].description} <a href="${articles[key].url}" target=_blank>Read more</a></span></li><hr>`;
+if(articles[key].content==null){
+articles[key].content="";
+}
+let news=`<li class="my-2"><span class="text-danger"><img class="mx-1" src="${articles[key].urlToImage}" height=100% width=100%><br>${articles[key].description}</span></li><span class="text-white">${articles[key].content} <a class="text-warning" href="${articles[key].url}" target=_blank>Read more</a></span><br><p class="text-secondary">Published At:- ${articles[key].publishedAt}</p></li><hr>`;
 htm+=news;
 }
 newsaccord.innerHTML=htm;
