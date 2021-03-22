@@ -10,7 +10,7 @@
 
     <title>Hello, world!</title>
   </head>
-  <body>
+  <body class="bg-dark text-light">
    <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
   <div class="container-fluid">
     <a class="navbar-brand" href="#">YR News</a>
@@ -73,7 +73,7 @@ let json=JSON.parse(this.responseText);
 let articles=json.articles;
 let htm="";
 for(key in articles){
-let news=`<li class="my-2"><span class="text-primary">Title-></span>${articles[key].title} and <span class="text-danger">News-></span>${articles[key].description}</li>`;
+let news=`<li class="my-2"><span class="text-danger">${articles[key].title}</span></li><span class="text-primary">${articles[key].description} <a href="${articles[key].url}" target=_blank>Read more</a></span></li><hr>`;
 htm+=news;
 }
 newsaccord.innerHTML=htm;
